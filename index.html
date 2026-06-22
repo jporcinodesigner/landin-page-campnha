@@ -41,22 +41,46 @@
 
     <section id="contato" class="max-w-2xl mx-auto px-6 py-20">
         <h2 class="text-3xl font-bold mb-6">Vamos tirar seu site do papel</h2>
-        <form action="https://api.sheetmonkey.io/form/2HdteMvA7JR8yEhrfBhR4H" method="POST" class="space-y-4">
-            <input type="text" name="Nome" placeholder="Seu nome" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
-            <input type="email" name="Email" placeholder="Seu e-mail" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
-            <input type="tel" name="Telefone" placeholder="Telefone" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
-            <input type="hidden" name="x-redirect" value="https://wa.me/5567991713343?text=Olá! Quero transformar meu negócio com um site profissional.">
-            <button type="submit" class="w-full bg-roxo text-white py-4 rounded-lg font-bold">Falar no WhatsApp</button>
+        <form id="whatsappForm" class="space-y-4">
+            <input type="text" id="name" name="Nome" placeholder="Seu nome" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
+            <input type="email" id="email" name="Email" placeholder="Seu e-mail" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
+            <input type="tel" id="phone" name="Telefone" placeholder="Telefone" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
+            <button type="submit" id="submitBtn" class="w-full bg-roxo text-white py-4 rounded-lg font-bold">Falar no WhatsApp</button>
         </form>
     </section>
 
     <script>
+        // Lógica do Carrossel
         const track = document.getElementById('carousel-track');
         let index = 0;
         setInterval(() => {
             index = (index + 1) % 2;
             track.style.transform = `translateX(-${index * 100}%)`;
         }, 4000);
+
+        // Lógica de Envio Integrado
+        document.getElementById('whatsappForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Enviando...";
+            
+            const formData = new FormData(this);
+
+            // 1. Envia para o SheetMonkey em segundo plano
+            await fetch('https://api.sheetmonkey.io/form/2HdteMvA7JR8yEhrfBhR4H', {
+                method: 'POST',
+                body: formData
+            });
+
+            // 2. Monta a mensagem do WhatsApp
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const message = `Olá, meu nome é ${name}. Gostaria de solicitar um orçamento para o meu site. Meu telefone é ${phone}.`;
+            
+            // 3. Redireciona diretamente para o seu link
+            window.location.href = `https://wa.me/5567991713343?text=${encodeURIComponent(message)}`;
+        });
     </script>
 </body>
 </html>
