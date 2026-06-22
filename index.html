@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Negócio merece um Site que Vende</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #000000; color: #ffffff; }
+        .text-roxo { color: #88177e; }
+        .bg-roxo { background-color: #88177e; }
+        .border-roxo { border: 1px solid #88177e; }
+        
+        /* Estilos do Carrossel */
+        .carousel-container { overflow: hidden; width: 100%; position: relative; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-item { min-width: 100%; padding: 0 1rem; box-sizing: border-box; }
+    </style>
+</head>
+<body class="font-sans">
+
+    <section class="max-w-2xl mx-auto px-6 py-20 text-center">
+        <h1 class="text-4xl font-bold mb-6">Seu Negócio merece um Site que Vende</h1>
+        <p class="text-lg text-gray-300 mb-8">Sites focados em conversão, ultra rápidos e feitos sob medida para celular.</p>
+        <a href="#contato" class="bg-roxo text-white px-8 py-4 rounded-lg font-bold">Começar meu projeto</a>
+    </section>
+
+    <section class="max-w-2xl mx-auto px-6 py-10">
+        <h2 class="text-2xl font-bold mb-8 text-center">Nossos Projetos</h2>
+        <div class="carousel-container border-roxo rounded-lg p-4">
+            <div class="carousel-track" id="carousel-track">
+                <div class="carousel-item">
+                    <img src="imagens/mobile-fFirst (1).gif" alt="Projeto Mobile" class="w-full rounded">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagens/landin-lages.gif" alt="Projeto Landing Page" class="w-full rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="max-w-2xl mx-auto px-6 py-20">
+        <h2 class="text-3xl font-bold mb-6">Vamos tirar seu site do papel</h2>
+        <form action="https://api.sheetmonkey.io/form/2HdteMvA7JR8yEhrfBhR4H" method="POST" class="space-y-4">
+            <input type="text" name="Nome" placeholder="Seu nome" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
+            <input type="email" name="Email" placeholder="Seu e-mail" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
+            <input type="tel" name="Telefone" placeholder="Telefone" required class="w-full p-3 rounded bg-gray-900 border border-gray-700">
+            <input type="hidden" name="x-redirect" value="https://wa.me/5567991713343?text=Olá! Quero transformar meu negócio com um site profissional.">
+            <button type="submit" class="w-full bg-roxo text-white py-4 rounded-lg font-bold">Falar no WhatsApp</button>
+        </form>
+    </section>
+
+    <script>
+        const track = document.getElementById('carousel-track');
+        let index = 0;
+        setInterval(() => {
+            index = (index + 1) % 2;
+            track.style.transform = `translateX(-${index * 100}%)`;
+        }, 4000);
+    </script>
+</body>
+</html>
